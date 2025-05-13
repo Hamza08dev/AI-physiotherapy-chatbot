@@ -1,7 +1,8 @@
+import os
 import pytest
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from backend.routes.auth_routes import auth_bp  # Adjust the import if needed
+from routes.auth_routes import auth_bp  # Updated import path
 
 # Initialize SQLAlchemy and Flask app
 db = SQLAlchemy()
@@ -10,9 +11,11 @@ db = SQLAlchemy()
 def app():
     # Set up the Flask application for testing
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # Use an in-memory SQLite database for testing
+    # Use environment variable for database URL if available, otherwise use SQLite
+    database_url = os.getenv('DATABASE_URL', 'sqlite:///:memory:')
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your_jwt_secret_key')
     
     db.init_app(app)
     app.register_blueprint(auth_bp, url_prefix='/auth')
