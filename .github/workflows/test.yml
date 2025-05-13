@@ -34,7 +34,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+      - name: Pull LFS files
+        run: git lfs pull
+      - name: Check model file
+        run: ls -lh backend/models/
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
