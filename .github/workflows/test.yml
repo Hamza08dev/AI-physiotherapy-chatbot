@@ -29,6 +29,7 @@ jobs:
       DATABASE_URL: mysql://root:root@localhost:3306/test_db
       JWT_SECRET_KEY: test_secret_key
       TESTING: true
+      PYTHONPATH: ${{ github.workspace }}/backend
 
     steps:
       - name: Checkout code
