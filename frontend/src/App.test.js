@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-test('renders learn react link', () => {
+test('renders Navbar component', () => {
   render(
     <Router>
       <App />
     </Router>
   );
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const navbarElement = screen.getByRole('navigation');
+  expect(navbarElement).toBeInTheDocument();
 });
