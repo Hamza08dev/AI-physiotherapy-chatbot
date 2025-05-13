@@ -1,7 +1,5 @@
-*.safetensors
 *.pt
 *.pth
-*.h5
 *.ckpt
 *.onnx
 
